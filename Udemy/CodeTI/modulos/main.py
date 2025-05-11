@@ -1,11 +1,13 @@
+# Programa Principal
 import math_operations
-import strings_utils
+from math_operations import multiply, divide
+import string_utils
 
-print(math_operations.sum(10,7))
-print(math_operations.substract(8, 3))
-print(math_operations.multiply(103,3))
-print(math_operations.divide(8712,3))
+print(math_operations.sum(5, 3))
+print(math_operations.subtract(5, 3))
+print(multiply(5, 3))
+print(divide(5, 3))
 
-print(strings_utils.capitalize("hello"))
-print(strings_utils.reverse_string("hello world!"))
-print(strings_utils.count("Paralelepidedo"))
+print(string_utils.capitalize("hello"))
+print(string_utils.reverse_string("python"))
+print(string_utils.count("apple"))
