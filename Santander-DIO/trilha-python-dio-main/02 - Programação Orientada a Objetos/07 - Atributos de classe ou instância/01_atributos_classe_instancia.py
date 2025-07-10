@@ -14,7 +14,7 @@ def mostrar_valores(*objs):
         print(obj)
 
 
-aluno_1 = Estudante("Guilherme", 1)
+aluno_1 = Estudante("Guilherme", 1) 
 aluno_2 = Estudante("Giovanna", 2)
 mostrar_valores(aluno_1, aluno_2)
 
