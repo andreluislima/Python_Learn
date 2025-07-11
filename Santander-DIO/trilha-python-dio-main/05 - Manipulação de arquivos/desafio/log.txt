@@ -4,3 +4,4 @@
 [2023-10-04 20:00:03] Função 'criar_conta' executada com argumentos (1, [], []) e {}. Retornou None
 [2023-10-04 20:00:14] Função 'criar_cliente' executada com argumentos ([<PessoaFisica: ('2')>],) e {}. Retornou None
 [2023-10-04 20:05:27] Função 'criar_cliente' executada com argumentos ([<PessoaFisica: ('Chappie', '3')>],) e {}. Retornou None
+[2025-07-11 13:30:53] Fun��o 'criar_conta' executada com argumentos (1, [], []) e {}. Retornou None
