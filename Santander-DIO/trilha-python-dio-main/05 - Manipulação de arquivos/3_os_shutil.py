@@ -2,15 +2,29 @@ import os
 import shutil
 from pathlib import Path
 
+print(__file__)
 ROOT_PATH = Path(__file__).parent
 
-os.mkdir(ROOT_PATH / "novo-diretorio")
 
-arquivo = open(ROOT_PATH / "novo.txt", "w")
-arquivo.close()
+# CRIANDO A PASTA com o divisor '/' correto.
+# os.mkdir(ROOT_PATH / "novo-diretorio-andre") 
 
-os.rename(ROOT_PATH / "novo.txt", ROOT_PATH / "alterado.txt")
+# CRIANDO O ARQUIVO
+# arquivo = open(ROOT_PATH / "teste_simples_2.txt", "w")
+# arquivo.close()
 
-os.remove(ROOT_PATH / "alterado.txt")
+# CRIANDO O ARQUIVO dentro da pasta 'novo-diretorio-andre'
+# arquivo = open(ROOT_PATH / "novo-diretorio-andre"/ "teste4", "w")
+# arquivo.close()
 
-shutil.move(ROOT_PATH / "novo.txt", ROOT_PATH / "novo-diretorio" / "novo.txt")
+# RENOMEANDO
+# os.rename(ROOT_PATH / "teste_andre.txt", ROOT_PATH / "alterado_andre.txt")
+
+
+# REMOVENDO
+# os.remove(ROOT_PATH / "teste.txt")
+
+# MOVENDO
+
+shutil.move(ROOT_PATH /"teste_simples_2.txt", ROOT_PATH / "novo-diretorio-andre"/"teste_simples_2.txt")
+# shutil.move(ROOT_PATH / "novo.txt", ROOT_PATH / "novo-diretorio" / "novo.txt")

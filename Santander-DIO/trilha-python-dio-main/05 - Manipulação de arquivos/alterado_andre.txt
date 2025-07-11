@@ -1,0 +1,5 @@
+Escrevendo dados em um novo arquivo de testes
+escrevendo
+um
+novo
+texto
