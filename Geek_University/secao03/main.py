@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi import status
 
+from models import Curso
+
 app = FastAPI()
 
 cursos = {
@@ -18,12 +20,12 @@ cursos = {
     }
 }
 
-@app.get('/curso')
+@app.get('/cursos')
 async def get_cursos():
     return cursos
 
 ## SEM tratamento de exceção
-# @app.get('/curso/{curso_id}')
+# @app.get('/cursos/{curso_id}')
 # async def get_curso(curso_id:int): ## curso_id:int -> Declarando que o valor do id deve ser inteiro. 
 #                                    ## Caso não seja, o fastapi irá tratar o erro.
 #     curso = cursos[curso_id]
@@ -32,7 +34,7 @@ async def get_cursos():
 #     return curso
 
 ## COM tratamento de exceção
-@app.get('/curso/{curso_id}')
+@app.get('/cursos/{curso_id}')
 async def get_curso_by_id(curso_id:int):
     try:
         curso = cursos[curso_id]
@@ -41,6 +43,15 @@ async def get_curso_by_id(curso_id:int):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail='Curso não encontrado.'
         )
+
+
+@app.post('/cursos', status_code=status.HTTP_201_CREATED)
+async def post_curso(curso: Curso):
+    next_id: int = len(cursos) + 1
+    cursos[next_id] = curso
+    del curso.id
+    return curso
+
 
 if __name__=='__main__':
     import uvicorn
