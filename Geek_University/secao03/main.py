@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi import HTTPException
+from fastapi import status
 
 app = FastAPI()
 
@@ -20,16 +22,25 @@ cursos = {
 async def get_cursos():
     return cursos
 
-@app.get('/curso/{curso_id}')
-async def get_curso(curso_id:int): ## curso_id:int -> Declarando que o valor do id deve ser inteiro. 
-    ## Caso não seja, o fastapi irá tratar o erro.
-    curso = cursos[curso_id]
-    curso.update({"id":curso_id})
+## SEM tratamento de exceção
+# @app.get('/curso/{curso_id}')
+# async def get_curso(curso_id:int): ## curso_id:int -> Declarando que o valor do id deve ser inteiro. 
+#                                    ## Caso não seja, o fastapi irá tratar o erro.
+#     curso = cursos[curso_id]
+#     curso.update({"id":curso_id})
     
-    return curso
+#     return curso
 
-
-
+## COM tratamento de exceção
+@app.get('/curso/{curso_id}')
+async def get_curso_by_id(curso_id:int):
+    try:
+        curso = cursos[curso_id]
+        return curso
+    except KeyError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail='Curso não encontrado.'
+        )
 
 if __name__=='__main__':
     import uvicorn
