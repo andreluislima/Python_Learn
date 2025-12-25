@@ -79,7 +79,6 @@ async def delete_curso(curso_id:int):
         )
 
 
-### Query Parameters
 
 if __name__=='__main__':
     import uvicorn
