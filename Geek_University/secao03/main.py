@@ -5,6 +5,8 @@ from fastapi import status
 from fastapi.responses import JSONResponse
 from fastapi import Response
 
+from fastapi import Path
+
 from models import Curso
 
 app = FastAPI()
@@ -20,6 +22,11 @@ cursos = {
         "título":"Algorítmos e lógica de programação",
         "aulas":87,
         "horas":67
+    },
+    3:{
+        "título":"Programação em C",
+        "aulas":92,
+        "horas":101
     }
 }
 
@@ -29,7 +36,7 @@ async def get_cursos():
 
 ## COM tratamento de exceção
 @app.get('/cursos/{curso_id}')
-async def get_curso_by_id(curso_id:int):
+async def get_curso_by_id(curso_id:int = Path(default=None, title='ID do Curso', description='Deve ser entre 1 e 2', gt=0, lt=3)):
     try:
         curso = cursos[curso_id]
         return curso
@@ -71,6 +78,8 @@ async def delete_curso(curso_id:int):
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Não existe um curso com o id {curso_id}."
         )
 
+
+### Query Parameters
 
 if __name__=='__main__':
     import uvicorn
