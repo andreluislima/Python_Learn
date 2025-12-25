@@ -78,6 +78,13 @@ async def delete_curso(curso_id:int):
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Não existe um curso com o id {curso_id}."
         )
 
+### Query Parameters
+@app.get('/calculadora')
+async def calcular(a:int, b:int, c:int):
+    soma = a + b + c
+    return {"resultado: ": soma}
+
+
 
 
 if __name__=='__main__':
