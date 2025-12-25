@@ -24,15 +24,6 @@ cursos = {
 async def get_cursos():
     return cursos
 
-## SEM tratamento de exceção
-# @app.get('/cursos/{curso_id}')
-# async def get_curso(curso_id:int): ## curso_id:int -> Declarando que o valor do id deve ser inteiro. 
-#                                    ## Caso não seja, o fastapi irá tratar o erro.
-#     curso = cursos[curso_id]
-#     curso.update({"id":curso_id})
-    
-#     return curso
-
 ## COM tratamento de exceção
 @app.get('/cursos/{curso_id}')
 async def get_curso_by_id(curso_id:int):
@@ -51,6 +42,19 @@ async def post_curso(curso: Curso):
     cursos[next_id] = curso
     del curso.id
     return curso
+
+@app.put('/cursos/{curso_id}')
+async def put_curso(curso_id:int, curso: Curso):
+    
+    if curso_id in cursos:
+        cursos[curso_id] = curso
+        del curso.id
+        
+        return curso
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f'Curso não encontrado para o id: {curso_id}'
+        )
 
 
 if __name__=='__main__':
