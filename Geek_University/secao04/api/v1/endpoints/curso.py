@@ -19,7 +19,11 @@ router = APIRouter()
 # POST
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=CursoSchema)
 async def post_curso(curso: CursoSchema, db: AsyncSession = Depends(get_session)):
-    novo_curso = CursoModel(titulo=curso.titulo, aulas=curso.aulas, horas=curso.horas)
+    
+    novo_curso  = CursoModel(
+            titulo = curso.titulo, 
+            aulas = curso.aulas, 
+            horas = curso.horas)
 
     db.add(novo_curso)
     await db.commit()
@@ -37,7 +41,7 @@ async def get_all_curso(db: AsyncSession = Depends(get_session)):
         return cursos
 
 # GET BY ID
-@route.get('/{curso_id}', response_model = CursoSchema, status_code = status.HTTP_200_OK)
+@router.get('/{curso_id}', response_model = CursoSchema, status_code = status.HTTP_200_OK)
 async def get_curso_by_id(curso_id:int, db:AsyncSession = Depends(get_session)):
     async with db as session:
         query = select(CursoModel).filter(CursoModel.id == curso_id)
@@ -56,9 +60,9 @@ async def get_curso_by_id(curso_id:int, db:AsyncSession = Depends(get_session)):
 @router.put('/{curso_id}', response_model=CursoSchema, status_code=status.HTTP_202_ACCEPTED)
 async def put_curso(curso_id:int, curso:CursoSchema, db:AsyncSession = Depends(get_session)):
     async with db as session:
-        query: select(CursoModel).filter(CursoModel.id == curso_id)
-        result: await session.execute(query)
-        curso_update: result.scalar_one_or_none()
+        query = select(CursoModel).filter(CursoModel.id == curso_id)
+        result = await session.execute(query)
+        curso_update = result.scalar_one_or_none()
 
         if curso_update:
             curso_update.titulo = curso.titulo
@@ -76,9 +80,9 @@ async def put_curso(curso_id:int, curso:CursoSchema, db:AsyncSession = Depends(g
 @router.delete('/{curso_id}',status_code=status.HTTP_202_ACCEPTED)
 async def delete_curso(curso_id:int, db:AsyncSession = Depends(get_session)):
     async with db as session:
-        query: select(CursoModel).filter(CursoModel.id == curso_id)
-        result: await session.execute(query)
-        curso_del: result.scalar_one_or_none()
+        query = select(CursoModel).filter(CursoModel.id == curso_id)
+        result = await session.execute(query)
+        curso_del = result.scalar_one_or_none()
 
         if curso_del:
             await session.delete(curso_del)

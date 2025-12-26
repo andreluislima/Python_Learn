@@ -7,7 +7,7 @@ engine: AsyncEngine = create_async_engine(settings.DB_URL, echo=False)
 
 DBBaseModel = declarative_base()
 
-SessionLocal = sessionmaker(
+Session = sessionmaker(
     bind=engine,
     class_=AsyncSession,
     autoflush=False,
