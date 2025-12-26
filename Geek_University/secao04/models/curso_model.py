@@ -1,11 +1,10 @@
-from core.settings import settings
-
 from sqlalchemy import Column, Integer, String
+from core.database import DBBaseModel
 
-class CursoModel(settings.DBBaseModel):
-    __tabelname__ = 'cursos'
+class CursoModel(DBBaseModel):
+    __tablename__ = "cursos"
 
-    id: int = Column(Integer, primary_key=True, autoincrement=True)
-    titulo: str = Column(String(100))
-    aulas: int = Column(Integer)
-    horas: int = Column(Integer)
+    id = Column(Integer, primary_key=True, index=True)
+    titulo = Column(String, nullable=False)
+    aulas = Column(Integer, nullable=False)
+    horas = Column(Integer, nullable=False)
